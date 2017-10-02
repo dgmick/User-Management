@@ -1,0 +1,18 @@
+body {
+    padding-top: 70px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+
+.taille-form {
+    display: block;
+    width: 20%;
+    height: 30px;
+    border-radius: 4px;
+    color: black;
+    border: 1px solid #ccc;
+
+}

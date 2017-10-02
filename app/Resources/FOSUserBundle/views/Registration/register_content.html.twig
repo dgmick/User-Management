@@ -1,0 +1,31 @@
+{% extends '@View/views/base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Inscription</h2>
+        </div>
+    </div>
+    <section class="jumbotron">
+
+    {% trans_default_domain 'FOSUserBundle' %}
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+
+    <div class="row">
+        <div class="col-sm-2">
+            <div>
+                <input class="btn btn-success" type="submit" value="{{ 'registration.submit'|trans }}"/>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <a href="{{ path('fos_user_security_login') }}">
+                <button type="button" class="btn btn-primary">S'authentifier</button>
+            </a>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}

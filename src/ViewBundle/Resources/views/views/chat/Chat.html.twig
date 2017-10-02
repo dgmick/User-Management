@@ -1,0 +1,75 @@
+{% extends '@View/views/base.html.twig' %}
+
+
+{% block body %}
+    <br><br><br>
+
+    {{  form_start(chat)}}
+
+
+    {{ form_widget(chat.pseudo) }}
+    <br>
+    {{ form_widget(chat.message) }}
+
+    <br>
+    {{ form_widget(chat.Envoyer) }}
+
+
+    {{ form_widget(chat.Modifier) }}
+
+    {{ form_end(chat) }}
+    <br>
+
+    <a href="{{ path('chatdivers') }}"> Rafraichir la page </a> <br><br>
+
+{% endblock %}
+
+
+{% block content %}
+    <table class="table table-bordered ">
+
+        <thead>
+        <tr>
+            <th>Pseudo</th>
+            <th>Message</th>
+            <th>date/minute</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for Chat in chatList %}
+            <tr>
+                <td>{{ Chat.pseudo }}</td>
+                <td>{{ Chat.message }}</td>
+                <td>{{ Chat.createdAt | date('d/m/Y') }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+{% block aside %}
+    <div class="panel panel-info">
+        <div class="panel-heading">Les tags</div>
+        <div class="panel-body">
+            <ul class="list-inline">
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Archive</div>
+        <div class="panel-body">
+            <ul class="list-inline">
+
+
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
