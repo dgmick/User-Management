@@ -1,0 +1,55 @@
+{% extends '@View/base.html.twig' %}
+
+{% block title %}Partenaires{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-6">
+            <legend align="left">
+                <h3>Liste de Partenaires</h3>
+            </legend>
+        </div>
+        <div class="col-sm-6">
+            <tbody>
+            <td><a href="">
+                    <button type="button" class="btn btn-experience">Mes Partenaires</button>
+                </a></td>
+            </tbody>
+        </div>
+    </div>
+    {% for abon in abonnes %}
+        <div class="row">
+            <div class="jumbotron col-lg-4 col-sm-6 text-center">
+                <table border="1" cellpadding="15">
+                    <tr>
+                        <img src="{{ asset('images/construction.png') }}" class="img-circle" height="100">
+                        <h4> Nom :
+                            <small>{{ abon.username|upper }}</small>
+                        </h4>
+                        <h4>
+                            Age:
+                            <small></small>
+                        </h4>
+                        <h4>
+                            Loisir :
+                            <small></small>
+                        </h4>
+                        <h4> Dernière connexion :
+                        </h4>
+                    </tr>
+                </table>
+                <a href="">
+                    <button class="btn-success"> Ajoutez</button>
+                </a>
+                <a href="">
+                    <button class="btn-info"> Message</button>
+                </a>
+
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
+
+

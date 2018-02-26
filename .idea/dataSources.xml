@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="33259329">
-    <data-source source="LOCAL" name="MySQL - ProjectChat@localhost" uuid="a46f4ca0-7ce5-430f-aa45-5533bb732493">
+  <component name="DataSourceManagerImpl" format="xml" hash="4026613029">
+    <data-source source="LOCAL" name="MySQL - dgwaner_project_sheet@localhost" uuid="ad5bb5b3-ff14-4b14-9f12-6b2dee00e031">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/ProjectChat</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/dgwaner_project_sheet</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

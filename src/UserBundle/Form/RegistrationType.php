@@ -1,28 +1,15 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: dgmick
+ * Date: 20/02/2018
+ * Time: 12:34
+ */
 
 namespace UserBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\FormBuilderInterface;
 
-class RegistrationType extends AbstractType
+class RegistrationType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('name')
-            ->add('age', DateType::class)
-            ->add('loisirs');
-    }
 
-    public function getParent()
-    {
-        return 'fos_user_registration';
-    }
-
-    public function getName()
-    {
-        return 'user_user_registration';
-    }
 }

@@ -1,0 +1,37 @@
+{% extends '@View/base.html.twig' %}
+
+{% block title %}Profile de {{ app.user.username }}{% endblock %}
+
+{% block body %}
+
+    <p> Ton profile  </p>
+
+    <li>
+        <a href=""> Modifier </a>
+    </li>
+
+    {% for pro in profil %}
+        <div class="row">
+            <div class="jumbotron col-lg-4 col-sm-6 text-center">
+                <table border="1" cellpadding="15">
+                    <tr>
+                        <h4> Nom :
+                            <small>{{ pro.username }}</small>
+                        </h4>
+                        <h4>
+                            Age:
+                            <small> {{ pro.age|date}} </small>
+                        </h4>
+                        <h4>
+                            Loisir :
+                            <small> {{ pro.loisir }}</small>
+                        </h4>
+                        <h4> Dernière connexion :
+                        </h4>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        {% endfor %}
+{% endblock %}
