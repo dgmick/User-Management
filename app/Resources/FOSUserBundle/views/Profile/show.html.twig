@@ -1,0 +1,62 @@
+{% extends '@FOSUser/layout.html.twig' %}
+
+{% block title %}Espace de {{ app.user.username }}{% endblock %}
+
+{% block body %}
+
+    <div class="sidebar">
+        <ul class="list_no_bullets">
+            <li>
+                <a href="#summary">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#links">
+                    <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="#movies">
+                    <i class="fa fa-film" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#help">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <h1 align="center"> Profile </h1>
+    <div class="container_base">
+        <div class="row">
+            <div class="cards col-lg-4">
+                <h4> Photo de profil  :</h4>
+                {% if not app.user.illustration is empty %}
+                    <img src="{{ asset('images/uploads/'~ app.user.illustration) }}" class="img-circle" height="150"/><br>
+                {% else %}
+                    <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150"/><br>
+                {% endif %}
+                <h4> Nom :</h4>
+                <p ><span class="rouge">{{ app.user.lastName }}</span></p>
+                <h4> Prénom :</h4>
+                <p ><span class="rouge">{{ app.user.firstName }}</span></p>
+                <h4> Nom d'utilisateur :</h4>
+                <p ><span class="rouge">{{ app.user.username }}</span></p>
+                <h4> Date d'Anniversaire :</h4>
+                <p class="rouge" >{{ app.user.dateAnniversaire|date('d-M-Y') }}</p>
+                <h4> Adresse :</h4>
+                <p class="rouge">{{ app.user.adresse|capitalize }}</p>
+                <h4> Ville :</h4>
+                <p class="rouge">{{ app.user.ville|capitalize }} </p>
+                <h4> Code Postal :</h4>
+                <p class="rouge">{{ app.user.codePostal|capitalize }} </p>
+                <h4> Pays :</h4>
+                <p class="rouge">{{ app.user.pays|capitalize }} </p>
+                <a href="{{ path('edit', { 'id': user.id}) }}" class="btn btn-success">Modifier mes infos</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

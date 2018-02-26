@@ -5,16 +5,14 @@ namespace UserBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 
-class FriendRepository extends EntityRepository
+class UserRepository extends EntityRepository
 {
 
-    public function findAll()
+    public function findAllUsers()
     {
-        return $this->findBy(
-            [
-                'username' => 'ASC'
-            ]
-        );
+        $qb = $this->createQueryBuilder('user');
+        $qb->orderBy('user.username', 'ASC');
+        return $qb->getQuery()->getResult();
     }
 
 }

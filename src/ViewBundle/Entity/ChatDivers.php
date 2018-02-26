@@ -34,14 +34,7 @@ class ChatDivers
      * @ORM\Column(name="Message", type="string", length=255)
      */
     private $message;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="createdAt", type="datetimetz")
-     */
-    private $createdAt;
-
+    
     /**
      * Get id
      *
@@ -99,28 +92,5 @@ class ChatDivers
     {
         return $this->message;
     }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return ChatDivers
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
+    
 }

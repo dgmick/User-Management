@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - ProjectChat@localhost" uuid="a46f4ca0-7ce5-430f-aa45-5533bb732493">
+    <data-source name="MySQL - dgwaner_project_sheet@localhost" uuid="ad5bb5b3-ff14-4b14-9f12-6b2dee00e031">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <schema-pattern>projectchat.*</schema-pattern>
-      <default-schemas>projectchat.*</default-schemas>
+      <schema-pattern>dgwaner_project_sheet.*</schema-pattern>
+      <default-schemas>dgwaner_project_sheet.*</default-schemas>
     </data-source>
   </component>
 </project>

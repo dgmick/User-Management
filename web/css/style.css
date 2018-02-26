@@ -1,0 +1,52 @@
+/*Disposition SlideBar*/
+.sidebar {
+    position: fixed;
+    width: 120px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #384047;
+}
+
+.sidebar ul li a{
+    color: white;
+    font-size: 17px;
+}
+.page-content {
+    margin-left: 300px;
+}
+
+/*Styles des cards*/
+.container {
+    margin: auto;
+}
+.cards {
+    background-color: white;
+    margin: 20px auto;
+    padding: 30px;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgb(150, 150, 150);
+}
+
+.text_center {
+    text-align: center;
+}
+
+/*Style des lists*/
+.list_inline {
+    padding-left: 0px;
+}
+
+.list_no_bullets {
+    list-style: none;
+    padding: 10px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.list_no_bullets li {
+    padding :10px;
+    margin-bottom: 10px;
+    text-align: center;
+}

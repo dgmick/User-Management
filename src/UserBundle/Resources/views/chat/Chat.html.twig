@@ -1,5 +1,6 @@
-{% extends '@View/views/base.html.twig' %}
+{% extends '@View/base.html.twig' %}
 
+{% block title %}Messagerie{% endblock %}
 
 {% block body %}
     <br><br><br>
@@ -24,7 +25,6 @@
 
 {% endblock %}
 
-
 {% block content %}
     <table class="table table-bordered ">
 
@@ -32,8 +32,6 @@
         <tr>
             <th>Pseudo</th>
             <th>Message</th>
-            <th>date/minute</th>
-
         </tr>
         </thead>
 
@@ -42,34 +40,9 @@
             <tr>
                 <td>{{ Chat.pseudo }}</td>
                 <td>{{ Chat.message }}</td>
-                <td>{{ Chat.createdAt | date('d/m/Y') }}</td>
-
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-{% endblock %}
-
-
-{% block aside %}
-    <div class="panel panel-info">
-        <div class="panel-heading">Les tags</div>
-        <div class="panel-body">
-            <ul class="list-inline">
-
-            </ul>
-        </div>
-    </div>
-
-    <div class="panel panel-info">
-        <div class="panel-heading">Archive</div>
-        <div class="panel-body">
-            <ul class="list-inline">
-
-
-            </ul>
-        </div>
-    </div>
 
 {% endblock %}

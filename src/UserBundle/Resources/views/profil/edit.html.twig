@@ -2,9 +2,18 @@
 
 {% block body %}
 
+    <fieldset>
+        <legend align="left"><div id="fieldtitre"> <h3>Modifier Profil</h3></div></legend>
+        {{ form_start(editForm) }}
+
+        {{ form_widget(editForm) }}
+        <br/><br/>
+        <input type="submit" value="Modifier" class="btn btn-success" />
+        <a href="{{path('monEspace',{'user':app.user.id} ) }}" class="btn btn-danger">Annuler</a>
+        {{ form_end(editForm) }}
+    </fieldset>
+
+
 {% endblock %}
 
-{% block title %}
-
-{% endblock %}
 

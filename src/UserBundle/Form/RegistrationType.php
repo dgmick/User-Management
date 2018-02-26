@@ -1,15 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dgmick
- * Date: 20/02/2018
- * Time: 12:34
- */
 
 namespace UserBundle\Form;
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 
-class RegistrationType
+class RegistrationType extends AbstractType
 {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('lastName')
+            ->add('firstName')
+        ;
+    }
+
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'user_user_registration';
+    }
+
 
 }

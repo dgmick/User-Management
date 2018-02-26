@@ -27,7 +27,6 @@ class ChatDiversType extends AbstractType
                 'label' => 'Message',
                 'attr'=> ['placeholder'=>'Votre Message']
             ))
-            ->add('createdAt',DateType::class)
             ->add('Envoyer', SubmitType::class)
             ->add('Modifier', ResetType::class )
 

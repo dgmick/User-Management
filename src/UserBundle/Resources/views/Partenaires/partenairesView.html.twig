@@ -3,51 +3,55 @@
 {% block title %}Partenaires{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-sm-6">
-            <legend align="left">
-                <h3>Liste de Partenaires</h3>
-            </legend>
-        </div>
-        <div class="col-sm-6">
-            <tbody>
-            <td><a href="">
-                    <button type="button" class="btn btn-experience">Mes Partenaires</button>
-                </a></td>
-            </tbody>
-        </div>
+    <div class="sidebar">
+        <ul class="list_no_bullets">
+            <li>
+                <a href="{{ path('mesPartenaires', { 'id': app.user.id }) }}" data-toggle="tooltip" title="Mes Partenaires ">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
     </div>
-    {% for abon in abonnes %}
-        <div class="row">
-            <div class="jumbotron col-lg-4 col-sm-6 text-center">
-                <table border="1" cellpadding="15">
-                    <tr>
-                        <img src="{{ asset('images/construction.png') }}" class="img-circle" height="100">
-                        <h4> Nom :
-                            <small>{{ abon.username|upper }}</small>
-                        </h4>
-                        <h4>
-                            Age:
-                            <small></small>
-                        </h4>
-                        <h4>
-                            Loisir :
-                            <small></small>
-                        </h4>
-                        <h4> Dernière connexion :
-                        </h4>
-                    </tr>
-                </table>
-                <a href="">
-                    <button class="btn-success"> Ajoutez</button>
-                </a>
-                <a href="">
-                    <button class="btn-info"> Message</button>
-                </a>
+    <div class="container_base">
+        <h3 class="page-header">Liste de Partenaires</h3><br><br>
+        <div class="row"> </br>
+            {% for abon in abonnesList %}
+                <div class=" cards col-lg-4 col-sm-6 textcenter">
+                    <p class="text-center">{{ abon.username|upper }}</p>
+                    {% if not abon.illustration is empty %}
+                        <img src="{{ asset('images/uploads/'~ abon.illustration) }}" class="img-circle" height="150"/><br>
+                    {% else %}
+                        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150"/><br>
+                    {% endif %}
+                    <h4> Nom :</h4>
+                    <p ><span class="rouge">{{ abon.lastName }}</span></p>
+                    <h4> Prénom :</h4>
+                    <p ><span class="rouge">{{ abon.firstName }}</span></p>
+                    <h4> Nom d'utilisateur :</h4>
+                    <p ><span class="rouge">{{ abon.username }}</span></p>
+                    <h4> Date d'Anniversaire :</h4>
+                    <p class="rouge" >{{ abon.dateAnniversaire|date('d-M-Y') }}</p>
+                    <h4> Adresse :</h4>
+                    <p class="rouge">{{ abon.adresse|capitalize }}</p>
+                    <h4> Ville :</h4>
+                    <p class="rouge">{{ abon.ville|capitalize }} </p>
+                    <h4> Code Postal :</h4>
+                    <p class="rouge">{{ abon.codePostal|capitalize }} </p>
+                    <h4> Pays :</h4>
+                    <p class="rouge">{{ abon.pays|capitalize }} </p>
+                    <div class="foot" align="center">
+                        <a href="{{ path('ajout', { 'id': app.user.id }) }}">
+                            <button class="btn-success"> Ajoutez</button>
+                        </a>
+                        <a href="">
+                            <button class="btn-info"> Message</button>
+                        </a>
+                    </div>
 
-            </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div><br>
 
 
 {% endblock %}

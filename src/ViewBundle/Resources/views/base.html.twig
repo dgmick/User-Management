@@ -3,93 +3,116 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block title %} Administration {% endblock %}</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    {% block stylesheets %}
-        <link href="{{ asset('css/base.css') }}" rel="stylesheet">
-    {% endblock %}
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+    <!-- Css & Bootstrap Start -->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link href="{{ asset('css/base.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {% endblock %}
+    <!-- Css & Bootstrap End -->
+
 </head>
 <body>
 
-
 <!-- start Navigation bar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle"
-                    data-toggle="collapse"
-                    data-target="#nav-content">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}">Home Page</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle"
+                data-toggle="collapse"
+                data-target="#nav-content">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('homepage') }}">Home Page</a>
+    </div>
 
-        <div class="collapse navbar-collapse" id="nav-content">
-            <ul class="nav navbar-nav ">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li>
-                    <a href="{{ path('messagerie') }}"> Messagerie </a>
-                </li>
-                <li>
-                    <a href="{{ path('abonnees') }}"> Abonnées </a>
-                </li>
-                <li>
-                    <a href=""><span class="glyphicon glyphicon-cog"></span> Mon profil</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right ">
-                <li>
-                    <a class="btn " href="{{ path('fos_user_security_logout') }}"> Déconnexion </a>
-                </li>
-                {% else %}
+    <div class="collapse navbar-collapse" id="nav-content">
+        <ul class="nav navbar-nav ">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a href="#"> Project Dashboard </a>
+            </li>
+            <li>
+                <a href="{{ path('partenaires') }}"> Partenaires </a>
+            </li>
+            <li>
+                <a href="{{ path('messagerie') }}"> Messagerie </a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Mon Compte <span class="caret"></span></a>
+                <ul class="dropdown-menu">
                     <li>
-                        <a href="{{ path('fos_user_registration_register') }}"> S'inscrire </a>
-                    </li>
+{#
+                        <a href="{{path('monEspace',{'user':app.user.id} ) }}">Mon Espace</a>
+#}
+                        <a href="{{path('fos_user_profile_show' ) }}">Mon Espace</a>
+                    <li class="divider"></li>
                     <li>
-                        <a href="{{ path('fos_user_security_login') }}"> S'autentifier </a>
+                        <a href="{{ path('fos_user_security_logout') }}"> Déconnexion </a>
                     </li>
-                {% endif %}
-            </ul>
-        </div>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right ">
+            {% else %}
+                <li>
+                    <a href="{{ path('fos_user_registration_register') }}"> S'inscrire </a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}"> S'autentifier </a>
+                </li>
+{#                <li>
+                    <a href="{{ hwi_oauth_login_url('facebook') }}">Avec faceboob</a>
+                </li>
+                <li>
+                    <a href="{{ hwi_oauth_login_url('google') }}">Avec google</a>
+                </li>#}
+            {% endif %}
+        </ul>
     </div>
 </nav>
 <!--end navigation bar-->
-<div class="main">
-    <div class="container">
 
-            {% block body %}{% endblock %}
-            <section class="col-md-8">
-                {% block content %}{% endblock %}
-            </section>
-
-            <aside class="col-md-4">
-                {% block aside %}{% endblock %}
-            </aside>
-
-        </div>
+<!-- Block Start -->
+<div class="container">
+    <div align="center">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            {{ flashMessage }}
+        {% endfor %}
     </div>
+
+    {% block body %}{% endblock %}
+    <section class="col-md-8">
+        {% block content %}{% endblock %}
+    </section>
+
+    <aside class="col-md-4">
+        {% block aside %}{% endblock %}
+    </aside>
 </div>
+<!-- Block End -->
 
+<!-- Footer Start-->
+<footer>
+    <div class="container_base">
+        <p>Copyright &copy; Your Website 2018</p>
+    </div>
+</footer>
+<!-- Footer End-->
 
-<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- JavaScript Start -->
 {% block javascripts %}
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 {% endblock %}
+<!-- JavaScript End -->
 
 </body>
 </html>
