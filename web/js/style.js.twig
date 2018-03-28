@@ -1,0 +1,18 @@
+$(document).ready(function () {
+    $('#editProfile').click(function () {
+        //Afficher Le titre de popup
+        $('#modal-title').html("Modifier profile");
+        //path de l'action editer de fos user : formulaire de modification
+        var url = '{{ path('fos_user_profile_edit') }}';
+        $.ajax({
+            type: 'post',
+            url: url,
+            success: function (data) {
+                // résultat de action edit : formulaire inclure dans popup
+                $('#modal_detail').html(data);
+                //Affichage de nouvelle popup
+                $('#dataModal').modal("show");
+            }
+        });
+    });
+});

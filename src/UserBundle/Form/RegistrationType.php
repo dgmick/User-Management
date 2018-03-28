@@ -22,7 +22,7 @@ class RegistrationType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'user_user_registration';
+        return 'userbundle_registration';
     }
 
 

@@ -26,326 +26,50 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="last_name" , type="string" , length=25, nullable=true)
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Member", mappedBy="user", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    protected $lastName;
-
-    /**
-     * @var string
-     * @ORM\Column(name="first_name", type="string", length=25, nullable=true)
-     */
-    protected $firstName;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date_anniversaire", type="datetime", nullable = true)
-     */
-    protected $dateAnniversaire;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
-     */
-    protected $adresse;
-
-    /**
-     * @var string
-     * @ORM\Column(name="ville", type="string", length=25, nullable=true)
-     */
-    protected $ville;
-
-    /**
-     * @var string
-     * @ORM\Column(name="pays", type="string", length=50, nullable=true)
-     */
-    protected $pays;
-
-    /**
-     * @var string
-     * @ORM\Column(name="code_postal", type="string",length=5, nullable=true)
-     */
-    protected $codePostal;
-
-    /**
-     * @var string
-     * @ORM\Column(name="telephone", type="string", length=15, nullable=true)
-     */
-    protected $telephone;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
-     */
-    protected $users;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="illustration", type="string", nullable=true)
-     */
-    private $illustration;
-
-
-    /**
-     *@Assert\File(
-     *     mimeTypes={"image/jpeg","image/gif","image/png"},
-     *     mimeTypesMessage = "Svp inserer une image valide (png,jpg,jpeg)")
-     */
-    private $attachment;
-    
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="facebook_id", type="string", nullable=true)
-     */
-    protected $facebookId;
-
+    protected $member;
 
     public function __construct()
     {
         parent::__construct();
+        $this->member = new ArrayCollection();
     }
+        
+
 
     /**
-     * @var string
+     * Add member
      *
-     * @ORM\Column(name="google_id", type="string", nullable=true)
+     * @param \UserBundle\Entity\Member $member
+     *
+     * @return User
      */
-    protected $googleId;
-
-    /**
-     * @return string
-     */
-    public function getLastName()
+    public function addMember(\UserBundle\Entity\Member $member)
     {
-        return $this->lastName;
+        $this->member[] = $member;
+
+        return $this;
     }
 
     /**
-     * @param string $lastName
+     * Remove member
+     *
+     * @param \UserBundle\Entity\Member $member
      */
-    public function setLastName($lastName)
+    public function removeMember(\UserBundle\Entity\Member $member)
     {
-        $this->lastName = $lastName;
+        $this->member->removeElement($member);
     }
 
     /**
-     * @return string
+     * Get member
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFirstName()
+    public function getMember()
     {
-        return $this->firstName;
+        return $this->member;
     }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDateAnniversaire()
-    {
-        return $this->dateAnniversaire;
-    }
-
-    /**
-     * @param string $dateAnniversaire
-     */
-    public function setDateAnniversaire($dateAnniversaire)
-    {
-        $this->dateAnniversaire = $dateAnniversaire;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * @param string $adresse
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-    /**
-     * @param string $ville
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPays()
-    {
-        return $this->pays;
-    }
-
-    /**
-     * @param string $pays
-     */
-    public function setPays($pays)
-    {
-        $this->pays = $pays;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodePostal()
-    {
-        return $this->codePostal;
-    }
-
-    /**
-     * @param string $codePostal
-     */
-    public function setCodePostal($codePostal)
-    {
-        $this->codePostal = $codePostal;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
-
-    /**
-     * @param string $telephone
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-    
-
-    /**
-     * @param mixed $users
-     */
-    public function setUsers($users)
-    {
-        $this->users = $users;
-    }
-
-
-    /**
-     * Add user
-     */
-    public function addUser($user)
-    {
-        $this->users[] = $user;
-
-    }
-
-    /**
-     * Remove user
-     */
-    public function removeUser($user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * @return string
-     */
-    public function getIllustration()
-    {
-        return $this->illustration;
-    }
-
-    /**
-     * @param string $illustration
-     */
-    public function setIllustration($illustration)
-    {
-        $this->illustration = $illustration;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAttachment()
-    {
-        return $this->attachment;
-    }
-
-    /**
-     * @param mixed $attachment
-     */
-    public function setAttachment($attachment)
-    {
-        $this->attachment = $attachment;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFacebookId()
-    {
-        return $this->facebookId;
-    }
-
-    /**
-     * @param mixed $facebookId
-     */
-    public function setFacebookId($facebookId)
-    {
-        $this->facebookId = $facebookId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGoogleId()
-    {
-        return $this->googleId;
-    }
-
-    /**
-     * @param string $googleId
-     */
-    public function setGoogleId($googleId)
-    {
-        $this->googleId = $googleId;
-    }
-
-
-    
-
-    
-    
 }

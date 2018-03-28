@@ -4,6 +4,7 @@ namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -24,10 +25,18 @@ class Membre
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\File", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $file;
 
     /**
      * @var \DateTime
@@ -70,8 +79,7 @@ class Membre
      * @ORM\Column(name="PhoneNumber", type="string", length=15, nullable=true)
      */
     private $phoneNumber;
-
-
+    
     /**
      * @var string
      *
@@ -85,7 +93,6 @@ class Membre
      *     mimeTypesMessage = "Svp inserer une image valide (png,jpg,jpeg)")
      */
     private $attachment;
-
 
 
     /**
@@ -267,4 +274,70 @@ class Membre
     }
 
 
+
+    /**
+     * Set illustration
+     *
+     * @param string $illustration
+     *
+     * @return Membre
+     */
+    public function setIllustration($illustration)
+    {
+        $this->illustration = $illustration;
+
+        return $this;
+    }
+
+    /**
+     * Get illustration
+     *
+     * @return string
+     */
+    public function getIllustration()
+    {
+        return $this->illustration;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttachment()
+    {
+        return $this->attachment;
+    }
+
+    /**
+     * @param mixed $attachment
+     */
+    public function setAttachment($attachment)
+    {
+        $this->attachment = $attachment;
+    }
+
+
+
+    /**
+     * Set file
+     *
+     * @param \UserBundle\Entity\File $file
+     *
+     * @return Membre
+     */
+    public function setFile(\UserBundle\Entity\File $file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return \UserBundle\Entity\File
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
 }

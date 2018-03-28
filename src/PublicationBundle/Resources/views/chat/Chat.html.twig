@@ -1,0 +1,44 @@
+{% extends '@View/base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+    <br><br><br>
+
+    {{  form_start(chat)}}
+
+
+    {{ form_widget(chat.pseudo) }}
+    <br>
+    {{ form_widget(chat.message) }}
+
+    <br>
+    <input type="submit" value="Envoyer" class="btn btn-success" />
+    {{ form_end(chat) }}
+    <br>
+
+    <a href="{{ path('messenger') }}"> Rafraichir la page </a> <br><br>
+
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered ">
+
+        <thead>
+        <tr>
+            <th>Pseudo</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for Chat in messengerList %}
+            <tr>
+                <td>{{ Chat.pseudo }}</td>
+                <td>{{ Chat.message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

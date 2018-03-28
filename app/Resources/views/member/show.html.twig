@@ -1,0 +1,50 @@
+{% extends '@View/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="page-header">Membre</h1><br>
+        <div class="row">
+            <div class="span9">
+                <ul class="thumbnails">
+                    <div class="span3">
+                        <div class="thumbnail">
+                            <img src="{{ asset('images/imageprofil.png') }}" alt="" class="img-circle" width="200" height="150">
+                            <th>Date d'Anniversaire :</th>
+                            <td>{% if member.birthday %}{{ member.birthday|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <h4> Adresse :</h4>
+                            <p class="rouge">{{ member.address }}</p>
+                            <h4> Ville :</h4>
+                            <p class="rouge">{{ member.city|capitalize}} </p>
+                            <h4> Code Postal :</h4>
+                            <p class="rouge">{{ member.zipCode|capitalize}}</p>
+                            <h4> Pays :</h4>
+                            <p class="rouge">{{ member.contry|capitalize}} </p>
+                            <div class="foot" align="center">
+
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('member_index') }}" class="btn-success">Retour au membre</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('member_edit', { 'id': member.id }) }}" class="btn-info">Edit</a>
+                                    </li>
+                                    <li>
+                                        {{ form_start(delete_form) }}
+                                        <input type="submit" value="Delete">
+                                        {{ form_end(delete_form) }}
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

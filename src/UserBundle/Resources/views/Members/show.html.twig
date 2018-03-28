@@ -1,0 +1,59 @@
+{% extends '@View/base.html.twig' %}
+
+{% block title %}Partenaires{% endblock %}
+
+{% block body %}
+    <div class="sidebar">
+        <ul class="list_no_bullets">
+            <li>
+                <a href="{{ path('my-member', { 'id': app.user.id }) }}" data-toggle="tooltip" title="Mes Partenaires ">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="container_base">
+        <h3 class="page-header">Liste de Partenaires</h3><br><br>
+        <div class="row"> </br>
+            {% for abon in memberList %}
+                <div class=" cards col-lg-4 col-sm-6 textcenter">
+                    <p class="text-center">{{ abon.username|upper }}</p>
+                    {% if not abon.illustration is empty %}
+                        <img src="{{ asset('images/uploads/'~ abon.illustration) }}" class="img-circle" height="150"/><br>
+                    {% else %}
+                        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150"/><br>
+                    {% endif %}
+                    <h4> Nom :</h4>
+                    <p ><span class="rouge">{{ abon.lastName }}</span></p>
+                    <h4> Prénom :</h4>
+                    <p ><span class="rouge">{{ abon.firstName }}</span></p>
+                    <h4> Nom d'utilisateur :</h4>
+                    <p ><span class="rouge">{{ abon.username }}</span></p>
+                    <h4> Date d'Anniversaire :</h4>
+                    <p class="rouge" >{{ abon.dateAnniversaire|date('d-M-Y') }}</p>
+                    <h4> Adresse :</h4>
+                    <p class="rouge">{{ abon.adresse|capitalize }}</p>
+                    <h4> Ville :</h4>
+                    <p class="rouge">{{ abon.ville|capitalize }} </p>
+                    <h4> Code Postal :</h4>
+                    <p class="rouge">{{ abon.codePostal|capitalize }} </p>
+                    <h4> Pays :</h4>
+                    <p class="rouge">{{ abon.pays|capitalize }} </p>
+                    <div class="foot" align="center">
+                        <a href="{{ path('ajout', { 'id': app.user.id }) }}">
+                            <button class="btn-success"> Ajoutez</button>
+                        </a>
+                        <a href="">
+                            <button class="btn-info"> Message</button>
+                        </a>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div><br>
+
+
+{% endblock %}
+
+

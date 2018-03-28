@@ -20,4 +20,5 @@ services:
     user.form.registration:
         class: UserBundle\Form\RegistrationType
         tags:
-            - { name: form.type, alias: user_user_registration }
+            - { name: form.type, alias: userbundle_registration }
+

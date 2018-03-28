@@ -38,6 +38,14 @@ class File
      */
     private $attachment;
 
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Member", inversedBy="file",cascade={"persist"})
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
+    private $member;
+    
+
 
     /**
      * Get id
@@ -95,5 +103,31 @@ class File
     public function getAttachment()
     {
         return $this->attachment;
+    }
+
+
+
+    /**
+     * Set member
+     *
+     * @param \UserBundle\Entity\Member $member
+     *
+     * @return File
+     */
+    public function setMember(\UserBundle\Entity\Member $member = null)
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    /**
+     * Get member
+     *
+     * @return \UserBundle\Entity\Member
+     */
+    public function getMember()
+    {
+        return $this->member;
     }
 }

@@ -4,6 +4,7 @@ namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,9 +43,10 @@ class UserType extends AbstractType
                 'label'=> 'Ville',
                 'attr'=> ['placeholder'=>'Votre Ville']
             ))
-            ->add('pays',TextType::class, array(
+            ->add('pays',CountryType::class, array(
                 'label'=> 'Pays',
-                'attr'=> ['placeholder'=>'Votre Pays']
+                'attr'=> ['placeholder'=>'Votre Pays'],
+                'preferred_choices' => ['FR']
             ))
             ->add('codePostal',TextType::class, array(
                 'label'=> 'Code Postal',
@@ -65,16 +67,13 @@ class UserType extends AbstractType
                 'required' => false,
             ))->getForm()
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
+    }/**
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'UserBundle\Entity\User'
-
         ));
     }
 

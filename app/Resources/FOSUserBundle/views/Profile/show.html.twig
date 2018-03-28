@@ -1,34 +1,18 @@
+{#
 {% extends '@FOSUser/layout.html.twig' %}
 
 {% block title %}Espace de {{ app.user.username }}{% endblock %}
 
 {% block body %}
+        <div class="col-md-3">
+            <p class="lead">Listes Des Categories</p>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>
+            </div>
+        </div>
 
-    <div class="sidebar">
-        <ul class="list_no_bullets">
-            <li>
-                <a href="#summary">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#links">
-                    <i class="fa fa-link" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#movies">
-                    <i class="fa fa-film" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#help">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
     <h1 align="center"> Profile </h1>
     <div class="container_base">
         <div class="row">
@@ -55,8 +39,15 @@
                 <p class="rouge">{{ app.user.codePostal|capitalize }} </p>
                 <h4> Pays :</h4>
                 <p class="rouge">{{ app.user.pays|capitalize }} </p>
-                <a href="{{ path('edit', { 'id': user.id}) }}" class="btn btn-success">Modifier mes infos</a>
+                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-success">Modifier mes infos</a>
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock %}#}
+
+
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% include "@FOSUser/Profile/show_content.html.twig" %}
+{% endblock fos_user_content %}

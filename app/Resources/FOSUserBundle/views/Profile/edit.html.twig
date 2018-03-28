@@ -1,38 +1,20 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
-{#
-<h1>Client edit</h1>
+{#{% block body %}#}
 
-{{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-<input type="submit" value="Edit" />
-{{ form_end(edit_form) }}
+    {#<fieldset>#}
+        {#{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}#}
+        {#{{ form_widget(form) }}#}
 
-<ul>
-    <li>
-        <a href="{{ path('admin_client_index') }}">Back to the list</a>
-    </li>
-    <li>
-        {{ form_start(delete_form) }}
-        <input type="submit" value="Delete">
-        {{ form_end(delete_form) }}
-    </li>
-</ul>#}
+        {#<div>#}
+            {#<input type="submit" value="valider" />#}
+        {#</div>#}
+        {#{{ form_end(form) }}#}
+    {#</fieldset>#}
 
-{% block body %}
-
-    <fieldset>
-        <legend align="left"><div id="fieldtitre"> <h3>Modifier Profil</h3></div></legend>
-        {{ form_start(editForm) }}
-
-        {{ form_widget(editForm) }}
-        <br/><br/>
-        <input type="submit" value="Modifier" class="btn btn-success" />
-        <a href="{{path('fos_user_profile_show') }}" class="btn btn-danger">Annuler</a>
-        {{ form_end(editForm) }}
-    </fieldset>
+{#{% endblock %}#}
 
 
-{% endblock %}
-
-
+{% block fos_user_content %}
+    {% include "@FOSUser/Profile/edit_content.html.twig" %}
+{% endblock fos_user_content %}
