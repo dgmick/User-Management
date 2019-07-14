@@ -1,7 +1,6 @@
-{% extends '@View/base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
-
     <fieldset>
         <legend align="left"><div id="fieldtitre"> <h3>Modifier Profil</h3></div></legend>
         {{ form_start(editForm) }}
@@ -12,8 +11,6 @@
         <a href="{{path('fos_user_profile_show')}}" class="btn btn-danger">Annuler</a>
         {{ form_end(editForm) }}
     </fieldset>
-
-
 {% endblock %}
 
 

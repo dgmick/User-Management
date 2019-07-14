@@ -1,0 +1,50 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="row">
+            <div class="content-wrapper">
+                <h4 align="center" class="page-header">Bienvenue : {{ app.user.username|upper }}</h4>
+                <div class="col-md-8">
+                    <h5>Open Source</h5> <br>
+                </div>
+            </div>
+            {#<div class="col-md-4">#}
+                {#<div class="panel panel-info">#}
+                    {#<div class="panel-heading">Les tags</div>#}
+                    {#<div class="panel-body">#}
+                        {#<ul class="list-inline">#}
+                        {#</ul>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="panel panel-info">#}
+                    {#<div class="panel-heading">Archive</div>#}
+                    {#<div class="panel-body">#}
+                        {#<ul class="list-inline">#}
+                        {#</ul>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        </div>
+    {% else %}
+        <div class="robust-content content container-fluid">
+            <div class="content-wrapper">
+                <h1>Open Source</h1> <br>
+                <h3>Site en Contrustion / teste users </h3><br>
+                <img src="{{ asset('images/construction.png') }}" height="100"/><br><br>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a href="{{ path('fos_user_security_login') }}">
+                            <button type="button" class="btn btn-primary">S'authentifier</button><br>
+                        </a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="{{ path('fos_user_registration_register') }}">
+                            <button type="button" class="btn btn-success">S'inscrire</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

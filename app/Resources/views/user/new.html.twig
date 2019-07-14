@@ -1,16 +1,58 @@
-{% extends '@View/base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
-    <h1>User creation</h1>
+    <h1>Creation d'un Partenaire</h1>
+    <section>
+        <form id="register-form" action="{{ path('user_new') }}" method="post" enctype="multipart/form-data">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <fieldset class="form-group has-feedback has-icon-left">
+                        {{ form_row(form.firstName) }}
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <fieldset class="form-group has-feedback has-icon-left">
+                        {{ form_row(form.lastName) }}
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.username) }}
+            </fieldset>
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.email) }}
+            </fieldset>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <fieldset class="form-group has-feedback has-icon-left">
+                        {{ form_row(form.Address) }}
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <fieldset class="form-group has-feedback has-icon-left">
+                        {{ form_row(form.phone) }}
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.Birthday) }}
+            </fieldset>
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.country) }}
+            </fieldset>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.plainPassword) }}
+            </fieldset>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-    </ul>
+            <fieldset class="form-group has-feedback has-icon-left">
+                {{ form_row(form.imagesId) }}
+            </fieldset>
+            <input class="btn btn-success" type="submit" value="Enregistrer"/>
+            <a class="btn btn-primary" href="{{ path('user_index') }}">Retour a la Liste</a>
+            {{ form_end(form) }}
+        </form>
+    </section>
+
 {% endblock %}

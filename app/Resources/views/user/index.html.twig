@@ -1,53 +1,41 @@
-{% extends '@View/base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
-    <h1>Users list</h1>
+<h1>Liste des Partenaires</h1>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+            <li>
+                <a class="btn btn-primary" href="{{ path('user_new') }}">Créer un utilisateur</a>
+            </li>
+        </ul>
+    {% endif %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Lastname</th>
-                <th>Firstname</th>
-                <th>Dateanniversaire</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Pays</th>
-                <th>Codepostal</th>
-                <th>Telephone</th>
-                <th>Illustration</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{% if user.dateAnniversaire %}{{ user.dateAnniversaire|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ user.adresse }}</td>
-                <td>{{ user.ville }}</td>
-                <td>{{ user.pays }}</td>
-                <td>{{ user.codePostal }}</td>
-                <td>{{ user.telephone }}</td>
-                <td>{{ user.illustration }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new user</a>
-        </li>
-    </ul>
+<div class="row">
+    {% for user in users %}
+    <div class="col-md-4">
+        <div class="cards">
+            {% if not user.imagesId is empty %}
+            <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+            {% else %}
+                <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+            {% endif %}
+            <p>{{ user.lastName }}</p>
+            <p>{{ user.firstName }}</p>
+            <p>{{ user.country }}</p>
+            <ul>
+                <li>
+                    <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">Visualiser</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

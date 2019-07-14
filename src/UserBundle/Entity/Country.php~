@@ -1,0 +1,115 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dgmick
+ * Date: 05/06/2019
+ * Time: 02:56
+ */
+
+namespace UserBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="Country")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\CountryRepository")
+ */
+class Country implements CountryInterface
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string $name
+     * @ORM\Column(name="name", type="string", length=50)
+     * @Assert\NotBlank(message="Veuillez entrer un Pays")
+     */
+    protected $name;
+
+    /**
+     * @var string $language
+     * @ORM\Column(name="language", type="string", length=50)
+     * @Assert\Locale()
+     */
+    protected $language;
+
+    /**
+     * @var string $iso2
+     * @ORM\Column(name="iso2", type="string", length=25)
+     */
+    protected $iso2;
+
+    /**
+     * GETTERS AND SETTERS
+     */
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIso2()
+    {
+        return $this->iso2;
+    }
+
+    /**
+     * @param string $iso2
+     */
+    public function setIso2($iso2)
+    {
+        $this->iso2 = $iso2;
+    }
+}

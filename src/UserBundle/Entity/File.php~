@@ -32,7 +32,7 @@ class File
     private $illustration;
 
     /**
-     *@Assert\File(
+     * @Assert\File(
      *     mimeTypes={"image/jpeg","image/gif","image/png"},
      *     mimeTypesMessage = "Svp inserer une image valide (png,jpg,jpeg)")
      */
@@ -44,7 +44,6 @@ class File
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
     private $member;
-    
 
 
     /**
@@ -104,8 +103,6 @@ class File
     {
         return $this->attachment;
     }
-
-
 
     /**
      * Set member

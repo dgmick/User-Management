@@ -1,0 +1,10 @@
+services:
+    country.provider:
+        class: AppBundle\Service\CountryProvider
+        arguments:
+          - AppBundle\Entity\Country
+    upload.files:
+        class: AppBundle\Service\UploadFiles
+        arguments:
+            - '%images_directory%'
+            - '%files_directory%'

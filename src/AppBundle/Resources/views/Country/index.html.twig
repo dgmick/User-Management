@@ -1,0 +1,38 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2>Pays</h2>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <p>
+            <a class="btn btn-primary" href="{{ path('createCountry') }}">Nouveau Pays</a>
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Langue</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for country in countries %}
+                <tbody>
+                <tr>
+                    <td>{{ country.name }}</td>
+                    <td>{{ country.language }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('editCountry', {'id': country.id}) }}">Modifier</a>
+                        <a class="btn btn-danger" href="{{ path('deleteCountry', {'id': country.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -2,13 +2,8 @@ user_user:
     resource: "@UserBundle/Controller/UserController.php"
     type:     annotation
 
-publication:
-    resource: "@PublicationBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-view:
-    resource: "@ViewBundle/Controller/"
+App:
+    resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /
 

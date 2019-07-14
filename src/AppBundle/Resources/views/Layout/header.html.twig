@@ -1,0 +1,49 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle"
+                data-toggle="collapse"
+                data-target="#nav-content">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('homepage') }}">Home Page</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="nav-content">
+        <ul class="nav navbar-nav ">
+            {% if is_granted('ROLE_ADMIN')  %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Admin Dashboard <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('country') }}">Pays</a></li>
+                        <li><a href="#">Page 1-2</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a href="{{ path('user_index') }}"> Partenaires </a>
+            </li>
+            <li>
+                <a href="#"> Messagerie </a>
+            </li>
+            <li>
+                <a href="{{path('fos_user_profile_show' ) }}">Mon Espace</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% else %}
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans }}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

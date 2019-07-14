@@ -1,20 +1,4 @@
 {% extends "@FOSUser/layout.html.twig" %}
-
-{#{% block body %}#}
-
-    {#<fieldset>#}
-        {#{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}#}
-        {#{{ form_widget(form) }}#}
-
-        {#<div>#}
-            {#<input type="submit" value="valider" />#}
-        {#</div>#}
-        {#{{ form_end(form) }}#}
-    {#</fieldset>#}
-
-{#{% endblock %}#}
-
-
 {% block fos_user_content %}
     {% include "@FOSUser/Profile/edit_content.html.twig" %}
 {% endblock fos_user_content %}

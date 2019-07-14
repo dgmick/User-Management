@@ -6,60 +6,10 @@ body {
     color: #222831;
 }
 
-.taille-form {
-    display: block;
-    width: 20%;
-    height: 30px;
-    border-radius: 4px;
-    color: black;
-    border: 1px solid #ccc;
-}
-
-.border-partenaire {
-    border-style: groove;
-    background-color: whitesmoke;
-    border-radius: 20px;
-    width: 30%;
-}
-
-.container_base {
-    justify-content: space-around;
-    display: flex;
-}
-
-
-.rouge{
-    color: red;
-}
-
-
-.img-center {
-    margin: 0 auto;
-}
-
 footer {
     margin: 50px 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-footer {
-    margin: 50px 0;
+ul {
+    list-style-type: none;
 }

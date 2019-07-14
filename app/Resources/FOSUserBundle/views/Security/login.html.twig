@@ -3,43 +3,41 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     <div class="container_base cards">
-        <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-
-            <!-- Team Members Row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Connexion</h2>
+        <div class="card-block">
+            <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Connexion</h2>
+                    </div>
                 </div>
-            </div>
-
-            <section class=" ">
-                <div class="form-group">
-                    <label for="username">{{ 'security.login.username'|trans }}</label>
-                    <input class="taille-form" type="text" id="username" name="_username" value="{{ last_username }}"
-                           required="required"/>
-                </div>
-                <div class="form-group">
+                <fieldset class="form-group has-feedback has-icon-left">
+                    <div class="form-group">
+                        <label for="username">{{ 'security.login.username'|trans }}</label>
+                        <input class="taille-form form-control input-lg" type="text" id="username" name="_username" value="{{ last_username }}"
+                               required="required"/>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group has-feedback has-icon-left">
                     <label for="password">{{ 'security.login.password'|trans }}</label>
-                    <input class="taille-form" type="password" id="password" name="_password" required="required"/>
+                    <input class="taille-form form-control input-lg" type="password" id="password" name="_password" required="required"/>
+                </fieldset>
+                <fieldset class="form-group row">
+                    <div class="col-md-6 col-xs-12 text-xs-center text-md-right"><a href="{{ path('fos_user_resetting_request') }}" class="card-link">Mot de passe perdu ?</a></div>
+                </fieldset>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <input class="btn btn-primary btn-block btn-lg mt-3" type="submit" value="{{ 'layout.login'|trans }}" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <a href="{{ path('fos_user_registration_register') }}" class="btn btn-danger btn-block btn-lg"><i class="icon-head"></i>{{ 'layout.register'|trans }}</a>
+                    </div>
                 </div>
-                <input type="submit"
-                       class="btn btn-success"
-                       id="_submit"
-                       name="_submit"
-                       value="{{ 'security.login.submit'|trans }}"/>
-                <a href="{{ path('fos_user_registration_register') }}">
-                    <button type="button" class="btn btn-primary">S'inscrire</button>
-                </a>
-                <br>
-                <a href="{{ path('fos_user_resetting_request') }}">Mot de passe perdu ?</a>
-            </section>
-        </form>
+            </form>
+        </div>
     </div>
-
 {% endblock fos_user_content %}

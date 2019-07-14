@@ -49,3 +49,32 @@
     margin-bottom: 10px;
     text-align: center;
 }
+
+.field_color{
+    color: #bacf29;
+}
+
+.taille-form {
+    display: block;
+    width: 20%;
+    height: 30px;
+    border-radius: 4px;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.border-partenaire {
+    border-style: groove;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    width: 30%;
+}
+
+.container_base {
+    justify-content: space-around;
+    display: flex;
+}
+
+.img-center {
+    margin: 0 auto;
+}

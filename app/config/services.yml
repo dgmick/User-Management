@@ -21,4 +21,7 @@ services:
         class: UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: userbundle_registration }
+    UserBundle\DataFixtures\ORM\:
+        resource: '../../src/UserBundle/DataFixtures/ORM'
+        tags: ['doctrine.fixture.orm']
 

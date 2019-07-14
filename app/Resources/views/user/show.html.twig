@@ -1,68 +1,62 @@
-{% extends '@View/base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table>
+    <h1>Fiche de : <span style="color: blue">{{ user.fullName }}</span></h1>
+    <table class="table table-striped">
         <tbody>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Dateanniversaire</th>
-                <td>{% if user.dateAnniversaire %}{{ user.dateAnniversaire|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-            <tr>
-                <th>Pays</th>
-                <td>{{ user.pays }}</td>
-            </tr>
-            <tr>
-                <th>Codepostal</th>
-                <td>{{ user.codePostal }}</td>
-            </tr>
+        {% if not user.imagesId is empty %}
+            <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+        {% else %}
+            <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+        {% endif %}
+        <tr>
+            <th>Nom</th>
+            <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Date d'anniversaire</th>
+            <td>{% if user.Birthday %}{{ user.Birthday|date('Y-m-d') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Pays</th>
+            <td>{{ user.country }}</td>
+        </tr>
+        {% if is_granted('ROLE_ADMIN') %}
             <tr>
                 <th>Telephone</th>
-                <td>{{ user.telephone }}</td>
+                <td>{{ user.phone }}</td>
             </tr>
-            <tr>
-                <th>Illustration</th>
-                <td>{{ user.illustration }}</td>
-            </tr>
-            <tr>
-                <th>Facebookid</th>
-                <td>{{ user.facebookId }}</td>
-            </tr>
-            <tr>
-                <th>Googleid</th>
-                <td>{{ user.googleId }}</td>
-            </tr>
+        {% endif %}
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ user.address }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            {% for roles in user.roles %}
+                <td>{{ roles }}</td>
+            {% endfor %}
+        </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+            <li>
+                {{ form_start(delete_form) }}
+                <a class="btn btn-success" href="{{ path('user_index') }}">Retour a la liste</a>
+                <a class="btn btn-primary" href="{{ path('user_edit', { 'id': user.id }) }}">Modifier</a>
+                <input class="btn btn-danger" type="submit" value="Supprimer">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}

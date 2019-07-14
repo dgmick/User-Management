@@ -1,25 +1,19 @@
-{% extends '@View/base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
-
-    <h1 align="center"> Edit Mon Profile </h1>
+    <h1 align="center"> Modifier Profile de {{ user.fullName }}</h1>
     <div class="container_base">
         <div class="row">
-            <div class="cards col-lg-4">
-                <h4> Photo de profil  :</h4>
-                <form>
-                    {{ form_start(edit_form, {'class': 'horizontal-form'}) }}
-                    {% if not app.user.illustration is empty %}
-                        <img src="{{ asset('images/uploads/'~ app.user.illustration) }}" class="img-circle" height="150"/><br>
-                    {% else %}
-                        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150"/><br>
-                    {% endif %}
-                    {{ form_end(edit_form) }}
-                </form>
-                <div class="">
-                    <button type="submit" style="width: 100%;" class="btn btn-success"></i>Enregister</button>
-                </div>
-            </div>
+            <form action="{{ path('user_edit', { 'id': user.id }) }}" method="POST" enctype="multipart/form-data">
+                {% if not user.imagesId is empty %}
+                    <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+                {% else %}
+                    <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+                {% endif %}
+                {{ form_widget(edit_form, {'class': 'horizontal-form'}) }}
+                <button type="submit" style="width: 100%;" class="btn btn-success">Enregister</button>
+                <a class="btn btn-primary" style="width: 100%;" href="{{ path('user_show', { 'id': user.id }) }}">Retour a la liste</a>
+            </form>
         </div>
     </div>
 {% endblock %}

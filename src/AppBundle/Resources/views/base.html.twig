@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %} Administration {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+    <!-- Css & Bootstrap Start -->
+    {% block stylesheets %}
+        <!-- Custom CSS -->
+        <link href="{{ asset('css/base.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    {% endblock %}
+    <!-- Css & Bootstrap End -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- start Navigation bar -->
+{% include'@App/Layout/header.html.twig' %}
+<!--end navigation bar-->
+
+<!-- Block Start -->
+<div class="container">
+    <div align="center">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            {{ flashMessage }}
+        {% endfor %}
+    </div>
+
+    {% block body %}{% endblock %}
+    <aside class="col-md-4">
+        {% block aside %}{% endblock %}
+    </aside>
+
+    {% block footer %}
+        {% include '@App/Layout/footer.html.twig' %}
+    {% endblock %}
+</div>
+<!-- Block End -->
+
+<!-- JavaScript Start -->
+{% block javascripts %}
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/style.js.twig') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
+<!-- JavaScript End -->
+
+</body>
+</html>

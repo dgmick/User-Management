@@ -1,21 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h1 align="center"> Edit mon Profile </h1>
-<div class="container">
-    <div class="row">
-        <div class="span3">
-            {% include'@User/modulesUsed/users-connect.html.twig' %}
-        </div>
-        <div class="span4 offset2 cards">
-            <h4> Photo de profil  :</h4>
-            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-            {{ form_widget(form) }}
-            <div>
-                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-            </div>
-            {{ form_end(form) }}
+<h1 align="center"> Modifier mon Profile </h1>
 
-        </div>
+<form action="{{ path('fos_user_profile_edit') }}" method="POST" class="fos_user_profile_edit">
+    {% if not form.imagesId.vars.data is empty %}
+        <img src="{{ asset('/uploads/images/' ~ form.imagesId.vars.data) }}" class="img-circle" height="150"/>
+    {% else %}
+        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+    {% endif %}
+    {{ form_widget(form) }}
+    <div>
+        <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        <a class="btn btn-danger" href="{{ path('fos_user_profile_show') }}">Annuler</a>
     </div>
-</div>
-
+</form>

@@ -20,31 +20,49 @@ class UserController extends Controller
      *
      * @Route("/", name="user_index")
      * @Method("GET")
+     * @throws \Exception
      */
     public function indexAction()
     {
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new \Exception('vous ne pouvez pas acceder a cette page ');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('UserBundle:User')->findAll();
 
-        return $this->render('user/edit.html.twig', array(
+        return $this->render('user/index.html.twig', array(
             'users' => $users,
         ));
     }
 
     /**
-     * Creates a new user entity.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new \Exception('vous ne pouvez pas acceder a cette page ');
+        }
+
+        $uploadFiles = $this->get('upload.files');
+
         $user = new User();
-        $form = $this->createForm('UserBundle\Form\UserType', $user);
+        $form = $this->createForm('UserBundle\Form\Type\RegistrationFormType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('imagesId')->getData();
+            $fileName = $uploadFiles->upload($file);
+
+            $user->setImagesId($fileName);
+            $user->setEnabled(true);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -63,9 +81,14 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="user_show")
      * @Method("GET")
+     * @throws \Exception
      */
     public function showAction(User $user)
     {
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new \Exception('vous ne pouvez pas acceder a cette page ');
+        }
+
         $deleteForm = $this->createDeleteForm($user);
 
         return $this->render('user/show.html.twig', array(
@@ -79,17 +102,31 @@ class UserController extends Controller
      *
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
+     * @throws \Exception
      */
     public function editAction(Request $request, User $user)
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new \Exception('vous ne pouvez pas acceder a cette page ');
+        }
+
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('UserBundle\Form\UserType', $user);
+        $editForm = $this->createForm('UserBundle\Form\Type\UserUpdateType', $user);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $uploadFiles = $this->get('upload.files');
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $file = $editForm->get('imagesId')->getData();
+            $fileName = $uploadFiles->upload($file);
+
+            $user->setImagesId($fileName);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -104,9 +141,14 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
+     * @throws \Exception
      */
     public function deleteAction(Request $request, User $user)
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new \Exception('vous ne pouvez pas acceder a cette page ');
+        }
+
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
@@ -120,11 +162,8 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a form to delete a user entity.
-     *
-     * @param User $user The user entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @param User $user
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createDeleteForm(User $user)
     {
