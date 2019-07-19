@@ -28,6 +28,7 @@ class UserController extends Controller
             throw new \Exception('vous ne pouvez pas acceder a cette page ');
         }
 
+        dump('dd');
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('UserBundle:User')->findAll();
 
