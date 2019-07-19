@@ -1,14 +1,14 @@
 {% extends '@App/base.html.twig' %}
 
 {% block body %}
-<h1>Liste des Partenaires</h1>
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="flash-{{ label }}">
-            {{ message }}
-        </div>
+    <h1>Liste des Partenaires</h1>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
     {% if is_granted('ROLE_ADMIN') %}
         <ul>
             <li>
@@ -17,25 +17,28 @@
         </ul>
     {% endif %}
 
-<div class="row">
-    {% for user in users %}
-    <div class="col-md-4">
-        <div class="cards">
-            {% if not user.imagesId is empty %}
-            <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
-            {% else %}
-                <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
-            {% endif %}
-            <p>{{ user.lastName }}</p>
-            <p>{{ user.firstName }}</p>
-            <p>{{ user.country }}</p>
-            <ul>
-                <li>
-                    <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">Visualiser</a>
-                </li>
-            </ul>
-        </div>
+    <div class="row">
+        {% for user in users %}
+            <div class="col-md-4">
+                <div class="cards">
+                    {% if not user.imagesId is empty %}
+                        <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+                    {% else %}
+                        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+                    {% endif %}
+                    <p>{{ user.lastName }}</p>
+                    <p>{{ user.firstName }}</p>
+                    <p>{{ user.country }}</p>
+                    <ul>
+                        <li>
+                            <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">Visualiser</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(users) }}
+    </div>
 {% endblock %}

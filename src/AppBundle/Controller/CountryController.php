@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Country;
 use AppBundle\Form\CountryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,6 +17,7 @@ class CountryController extends Controller
 {
     /**
      * @Route("/admin/country", name="country")
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
@@ -25,8 +25,10 @@ class CountryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $countries = $em->getRepository('AppBundle:Country')->findAll();
 
+        $result = $this->get('app.pagination')->paginate($countries, 10);
+
         return $this->render('@App/Country/index.html.twig', array(
-            'countries' => $countries
+            'countries' => $result
         ));
     }
 

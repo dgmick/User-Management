@@ -8,3 +8,8 @@ services:
         arguments:
             - '%images_directory%'
             - '%files_directory%'
+    app.pagination:
+        class: AppBundle\Service\Pagination
+        arguments:
+            - '@request_stack'
+            - '@knp_paginator'

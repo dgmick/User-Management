@@ -29,11 +29,12 @@ class UserController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-
         $users = $em->getRepository('UserBundle:User')->findAll();
 
+        $result = $this->get('app.pagination')->paginate($users, 9);
+
         return $this->render('user/index.html.twig', array(
-            'users' => $users,
+            'users' => $result,
         ));
     }
 
