@@ -4,7 +4,6 @@ namespace UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -64,11 +63,6 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['placeholder' => 'Votre Email',
                     'class' => 'form-control input-lg'
                 ]
-            ))
-            ->add('imagesId', FileType::class, array(
-                'label' => 'Image de profile',
-                'required' => false,
-                'data_class' => null
             ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,

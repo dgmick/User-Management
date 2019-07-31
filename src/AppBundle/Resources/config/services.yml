@@ -13,3 +13,30 @@ services:
         arguments:
             - '@request_stack'
             - '@knp_paginator'
+    app.mailer_handler:
+        class: AppBundle\Service\MailerHandler
+        arguments:
+            - '@swiftmailer.mailer'
+            - '@templating'
+    app.form_profile_picture:
+        class: AppBundle\Service\FormProfilePicture
+        arguments:
+            - '@router.default'
+            - '@form.factory'
+
+    ##EvenListener##
+    app.update_profile.listener:
+        class: AppBundle\EventListener\UpdateProfileListener
+        arguments:
+            - '@app.mailer_handler'
+        tags:
+            - { name: kernel.event_subscriber}
+
+    ##Twig##
+    app.profile_picture:
+        class: AppBundle\Twig\ProfilePictureExtension
+        public: false
+        arguments:
+            - '@app.form_profile_picture'
+        tags:
+            - { name: twig.extension}

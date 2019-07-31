@@ -3,11 +3,6 @@
 <h1 align="center"> Modifier mon Profile </h1>
 
 <form action="{{ path('fos_user_profile_edit') }}" method="POST" class="fos_user_profile_edit">
-    {% if not form.imagesId.vars.data is empty %}
-        <img src="{{ asset('/uploads/images/' ~ form.imagesId.vars.data) }}" class="img-circle" height="150"/>
-    {% else %}
-        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
-    {% endif %}
     {{ form_widget(form) }}
     <div>
         <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />

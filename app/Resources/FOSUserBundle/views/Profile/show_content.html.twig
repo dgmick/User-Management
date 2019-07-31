@@ -4,11 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            {% if not user.imagesId is empty %}
-                <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
-            {% else %}
-                <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
-            {% endif %}
+            <div>
+                {% include ':user:profilePicture.html.twig' %}
+            </div>
             <h4> Nom : <span class="field_color">{{ user.lastName }}</span> </h4>
             <h4> Prénom : <span class="field_color">{{ user.firstName }}</span></h4>
             <h4> {{ 'profile.show.username'|trans }} : <span class="field_color">{{ user.username }}</span></h4>

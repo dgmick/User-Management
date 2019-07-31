@@ -1,0 +1,37 @@
+{% block body %}
+    <div data-toggle="modal" data-target="#myModal" class="user-picture img-circle white-bg">
+        {% if not user.imagesId is empty %}
+            <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+        {% else %}
+            <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+        {% endif %}
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {% set profile = profilePicture() %}
+                {{ form_start(profile) }}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel"><i class="ti-marker-alt m-r-10"></i>Mettre une photo</h5>
+                    {% if not user.imagesId is empty %}
+                        <img src="{{ asset('/uploads/images/' ~ user.imagesId) }}" class="img-circle" height="150"/>
+                    {% else %}
+                        <img src="{{ asset('images/imageprofil.png') }}" class="img-circle" height="150">
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_widget(profile.imagesId) }}
+                    <div class="modal-footer">
+                    </div>
+                    <button type="submit" class="btn btn-success"><i class="ti-save"></i>Enregistre</button>
+                </div>
+                {{ form_end(profile) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

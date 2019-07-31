@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Documentation Email Template</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/prettify.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_mail.css') }}">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+        <div class="pull-left">
+            <h1><a href="#" target="_blank"><span>Tittle</span></a></h1>
+        </div>
+    </nav>
+    <header>
+        <div class="container">
+            <h2 class="lone-header">Text Name</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            {% block mail_body %}
+            {% endblock %}
+        </div>
+    </section>
+    <section class="vibrant centered">
+        <div class="">
+            <h4>TEXT
+            </h4>
+        </div>
+    </section>
+    <footer>
+        <div class="">
+            <p>Copyright &copy; Your Website {{ "now" | date("Y") }}</p>
+        </div>
+    </footer>
+</div>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ 'prettify/prettify.js' }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="{{ asset('js/layout.js') }}"></script>
+</body>
+</html>

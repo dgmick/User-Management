@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\FormProfilePicture;
 
 /**
  * User controller.
@@ -74,6 +75,44 @@ class UserController extends Controller
         return $this->render('user/new.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/profilepicture", name="profilepicture")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function newProfilePicAction(Request $request)
+    {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new \Exception('Denied');
+        }
+
+        $user = $this->getUser();
+
+        $formProfilePicture = $this->get('app.form_profile_picture');
+        $editProfilePicture = $formProfilePicture->getForm();
+        $editProfilePicture->handleRequest($request);
+
+        $uploadFiles = $this->get('upload.files');
+
+        if ($editProfilePicture->isSubmitted() && $editProfilePicture->isValid()) {
+            $file = $editProfilePicture->get('imagesId')->getData();
+            $fileName = $uploadFiles->upload($file);
+
+            $user->setImagesId($fileName);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('user/profilePicture.html.twig', array(
+            'user' => $user,
+            'form' => $editProfilePicture->createView()
         ));
     }
 

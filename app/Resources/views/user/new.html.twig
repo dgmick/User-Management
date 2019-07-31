@@ -45,10 +45,6 @@
             <fieldset class="form-group has-feedback has-icon-left">
                 {{ form_row(form.plainPassword) }}
             </fieldset>
-
-            <fieldset class="form-group has-feedback has-icon-left">
-                {{ form_row(form.imagesId) }}
-            </fieldset>
             <input class="btn btn-success" type="submit" value="Enregistrer"/>
             <a class="btn btn-primary" href="{{ path('user_index') }}">Retour a la Liste</a>
             {{ form_end(form) }}
